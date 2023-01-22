@@ -1,5 +1,4 @@
 """
-
 -----------------
 A - rock - X = 1
 B - paper - Y = 2
@@ -11,36 +10,37 @@ C - scissor - Z = 3
 """
 
 def main():
-    with open('input.txt') as inputFile:
-        score = 0
+    score = 0
+    with open('/home/abdu/git/advent2022/day2/input2.txt') as inputFile:
         for line in inputFile:
-            play1, play2 = line.split()
 
+            play1, play2 = line.split()
+            
             if play1 == 'A': # player 1 played rock
                 if play2 == 'Y': # player 2 played paper and won
-                    score += 8
+                    score += (2 + 6)
                 elif play2 == 'X': # player 2 played rock and tied. 
-                    score += 4
+                    score += (1 + 3)
                 else: # player 2 played scissors and lost
-                    score += 3
+                    score += (3 + 0)
 
             if play1 == 'B': # player 1 player paper
                 if play2 == 'Z': # player 2 plays scissor and won.
-                    score += 9
-                if play2 == 'Y': # player 2 plays paper and tied.
-                    score += 5
+                    score += (3 + 6)
+                elif play2 == 'Y': # player 2 plays paper and tied.
+                    score += (2 + 3)
                 else:
-                    score += 1
+                    score += (1 + 0)
 
             if play1 == 'C': # player 1 player scissor 
                 if play2 == 'X':
-                    score += 7
-                if play2 == 'Z':
-                    score += 6
+                    score += (1 + 6)
+                elif play2 == 'Z':
+                    score += (3 + 3)
                 else:
-                    score += 2
+                    score += (2 + 0)
 
-        print(score)
+    print(score)
 
 
 
