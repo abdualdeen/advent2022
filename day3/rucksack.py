@@ -5,11 +5,14 @@ A through Z is 27 through 52
 a group is 3 lines
 
 '''
+from queue import Empty
+
+
 GROUP_LENGTH = 3
 
 # given a list of strings it can find the common character
 def findCommonItem(group):
-    return [item for item in group[0].strip() if item in group[1].strip() and item in group[2].strip()]
+    return set.intersection(*map(set, group))
 
 # given 2 strings, it can find the common character.
 def findCommonElement(list1, list2):
@@ -45,25 +48,23 @@ def part1():
 def part2():
     items = []
     itemsSum = 0 # sum in ascii
-    with open('input.txt') as inputFile:
-        lines = inputFile.readlines()
+    with open('/home/abdu/git/advent2022/day3/input.txt') as inputFile:
+        lines = inputFile.read().splitlines()
         length = len(lines)
-        iterations = length/GROUP_LENGTH # number of iterations to get through the file. divide 
         i = 0
-        # print(length)
-        while (i < iterations):
-            group = lines[:i+3]
-            commonItem = findCommonItem(group)
-            
-            itemsSum += calculateItemSum(commonItem)
+        while (i < length):
+            group = lines[i:i+GROUP_LENGTH]
+            commonItem = list(findCommonItem(group)) # make the set into the list so it works with the rest of the code.
 
-            items.append(commonItem)
-            i += 1
-            break
+            if (commonItem):
+                itemsSum += calculateItemSum(commonItem[0])
+                items.append(commonItem[0])
+
+            i += GROUP_LENGTH # increment by three as we take 3 lines at a time.
             
         
-    # print(items)
-    # print(itemsSum)
+    print(items)
+    print(itemsSum)
 
 def main():
     # part1()
