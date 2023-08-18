@@ -37,7 +37,12 @@ def findPairOverlaps():
             
             # check if there is overlap between assignments
             # first, create the ranges
+            assignment1Range = range(min1, max1+1)
+            assignment2Range = range(min2, max2+1)
+            intersection = list(set(assignment1Range) & set(assignment2Range))
             
+            if len(intersection) > 0:
+                numberOfOverlaps += 1
             
             
         print(numberOfOverlaps)
